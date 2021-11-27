@@ -4,9 +4,11 @@ db.movies.aggregate([
   },
   {
     // desconstroi o array e pega nome de atores
+    // https://docs.mongodb.com/manual/reference/operator/aggregation/unwind/
     $unwind: "$cast",
   },
   {
+    // agrupa por cada pessoa que foi separada anteriormente com $unwind
     $group: {
       _id: "$cast",
       numeroFilmes: { $sum: 1 },
