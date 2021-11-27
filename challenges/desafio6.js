@@ -25,3 +25,6 @@ db.movies.aggregate([
     },
   },
 ]);
+
+// https://docs.mongodb.com/manual/reference/operator/query/regex/
+// https://docs.mongodb.com/manual/reference/operator/aggregation/group/
