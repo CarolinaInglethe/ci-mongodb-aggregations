@@ -37,3 +37,5 @@ db.movies.aggregate([
     $project: { _id: 0, title: 1 },
   },
 ]);
+
+// https://docs.mongodb.com/manual/reference/operator/aggregation/setIntersection/
