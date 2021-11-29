@@ -1,10 +1,11 @@
 db.trips.aggregate([
   {
+    // divide para tranformar em horas
     $group: {
       _id: "$usertype",
       duracaoMedia: {
         $avg: {
-          $subtract: [{ $hour: "$stopTime" }, { $hour: "$startTime" }],
+          $divide: [{ $subtract: ["$stopTime", "$startTime"] }, 3600000],
         },
       },
     },
