@@ -5,15 +5,14 @@ db.trips.aggregate([
     },
   },
   {
-    // sdivide para transformar em minutos
+    // calcula tempo e retorna em minutos(dateDiff)
     $addFields: {
-      duracaoMaxDeCadaViagem: {
-        $divide: [
-          {
-            $subtract: ["$stopTime", "$startTime"],
-          },
-          60000,
-        ],
+      duracaoMinutos: {
+        $dateDiff: {
+          startDate: "$startTime",
+          endDate: "$stopTime",
+          unit: "minute",
+        },
       },
     },
   },
@@ -22,7 +21,7 @@ db.trips.aggregate([
     $group: {
       _id: null,
       duracaoMediaEmMinutos: {
-        $avg: "$duracaoMaxDeCadaViagem",
+        $avg: "$duracaoMinutos",
       },
     },
   },
@@ -34,3 +33,5 @@ db.trips.aggregate([
     },
   },
 ]);
+
+// https://docs.mongodb.com/manual/reference/operator/aggregation/dateDiff/
