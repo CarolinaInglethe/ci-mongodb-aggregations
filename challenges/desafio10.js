@@ -2,7 +2,7 @@ db.trips.aggregate([
   {
     // pega duracao em horas (dateDiff)
     $addFields: {
-      duracao: {
+      duracaohoras: {
         $dateDiff: {
           startDate: "$startTime",
           endDate: "$stopTime",
@@ -14,7 +14,7 @@ db.trips.aggregate([
   {
     $group: {
       _id: "$usertype",
-      duracaoMedia: { $avg: "$duracao" },
+      duracaoMedia: { $avg: "$duracaohoras" },
     },
   },
   {
