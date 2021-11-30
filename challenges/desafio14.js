@@ -2,10 +2,11 @@ db.trips.aggregate([
   {
     $addFields: {
       duracaoEmMinutos: {
-        $divide: [
-          { $subtract: ["$stopTime", "$startTime"] },
-          60000,
-        ],
+        $dateDiff: {
+          startDate: "$startTime",
+          endDate: "$stopTime",
+          unit: "minute",
+        },
       },
     },
   },
@@ -25,3 +26,5 @@ db.trips.aggregate([
     },
   },
 ]);
+
+// https://docs.mongodb.com/manual/reference/operator/aggregation/dateDiff/
